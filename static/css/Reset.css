@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body,html{
+    height: 100%;
+    font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+}
+ul,ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
