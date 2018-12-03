@@ -19,3 +19,12 @@ npm run dev
 ```
 npm run build
 ```
+
+### 4.项目截图
+***
+![首页](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/TIM%E6%88%AA%E5%9B%BE20181203093240.png)
+![歌手](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/TIM%E6%88%AA%E5%9B%BE20181203093253.png)
+![排行版](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/TIM%E6%88%AA%E5%9B%BE20181203093305.png)
+![搜索](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/TIM%E6%88%AA%E5%9B%BE20181203093324.png)
+![搜索结果](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/TIM%E6%88%AA%E5%9B%BE20181203093355.png)
+![播放器界面](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/TIM%E6%88%AA%E5%9B%BE20181203093437.png)
