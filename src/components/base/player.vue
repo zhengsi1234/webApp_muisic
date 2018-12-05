@@ -33,7 +33,7 @@
                         </div>
                         <div class="control">
                             <div>
-                                <img src="./../../../static/img/play_icn_loop.png" class="sumall"/>
+                                <img src="./../../../static/img/download.png" class="sumall" @click="download"/>
                             </div>
                             <div>
                                 <img src="./../../../static/img/play_btn_prev.png" @click="upperListSong" class="caozuo"/>
@@ -179,7 +179,7 @@
         z-index: -1;  
     }
     .bg-cover{
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.7);
         height: 100%;
         width: 100%;
     }
@@ -271,14 +271,18 @@
         top: 0px;
     }
     /***进度条**/
+    .footer{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding-bottom: 0.6rem;
+    }
     .process {
         padding: 0 1.6rem;
         box-sizing: border-box;
         width: 100%;
-        height: 50px;
-        position: absolute;
-        bottom: 2rem;
-        left: 0;
+        height: 1rem;
         font-size: 12px;
         font-family: Arial, Helvetica, sans-serif;
     }
@@ -329,9 +333,9 @@
     /***底部按钮**/
     .control{
         display: flex;
-        position: absolute;
+        /* position: absolute;
         left: 0;
-        bottom: 0.6rem;
+        bottom: 0.6rem; */
         width: 100%;
     }
     .control div{
@@ -505,6 +509,11 @@ export default {
             audios.currentTime=vaule;
             this.isMove=true;
         },
+        //下载歌曲
+        download(){
+            let songUrl=this.MusicObj.songUrl;
+            window.open(songUrl);
+        },
         //开启歌曲监听事件
         addEventListeners(){
             const self = this;
@@ -523,11 +532,11 @@ export default {
         },
         _error(){
             console.log("歌曲播放失败");
-            alert("歌曲资源获取错误");
             this.isSlider=true;
             this.isPlay=false;
             this.isPlaue=true;
             this.playImg="./../../../static/img/play_play.png";
+            this.nextSong();
         },
         //当前播放
         _Play(){
