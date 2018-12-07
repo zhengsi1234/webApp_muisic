@@ -6,8 +6,9 @@
         <transition name="annimates" @enter="enter" @after-enter="afterEnter"  @leave="leave" @after-leave="afterLeave">
             <div class="FullPlayer_box animated" v-show="isShowFullPlayer" ref="cdWrapper">
                 <img src="../../../static/img/down.png" class="updown" @click="FullPlayer_updown"/>
-                <div class="FullPlayer" :style="{background:'url('+MusicObj.songImg+') center'}">
-                    <div class="bg-cover"></div>
+                <div class="FullPlayer">
+                    <!-- <div ></div> -->
+                    <img :src="MusicObj.songImg" class="bg-cover"/>
                 </div>
                 <!--标题-->
                 <div class="FullPlayer_title">
@@ -173,14 +174,15 @@
         height: 110%;  
         width: 110%;  
         margin: -5%;  
-        background-size: cover;   
+        /* background-size: cover;   
         -webkit-filter: blur(15px) brightness(0.6);  
         -moz-filter: blur(15px) brightness(0.6);  
-        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */  
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */ 
         z-index: -1;  
+        filter: blur(20px);
     }
     .bg-cover{
-        background: rgba(0, 0, 0, 0.7);
+        /* background: rgba(0, 0, 0, 0.7); */
         height: 100%;
         width: 100%;
     }
@@ -192,7 +194,7 @@
         height: 9%;
         width: 100%;
         z-index: 11;
-        background-color: rgba(253, 253, 253, 0.05);
+        background-color: rgba(0, 0, 0, 0.5);
     }
     .music-info{
         width: 100%;
@@ -205,13 +207,15 @@
         text-overflow: ellipsis;
         font-size: 16px;
         font-weight: lighter;
-        margin-top: 0.15rem;
+        margin-top: 0.1rem;
         font-weight: bold;
+        color: #C8C0CC;
     }
     .music-info .artist {
         font-size: 14px;
         color: #C8C0CC;
-        margin-top: 0.03rem;
+        margin-top: 0;
+
     }
     .play-board{
         position: absolute;
