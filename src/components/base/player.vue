@@ -2,8 +2,9 @@
     <div id="player" v-if="showPlayer">
         <audio :src="MusicObj.songUrl" autoplay ref="player"></audio>
         <!--全屏播放-->
-        <transition-group enter-active-class="bounceIn" leave-active-class="zoomOut">
-            <div class="FullPlayer_box animated" v-show="isShowFullPlayer" :key="1">
+        <!-- <transition-group enter-active-class="bounceIn" leave-active-class="zoomOut"> -->
+        <transition name="annimates" @enter="enter" @after-enter="afterEnter"  @leave="leave" @after-leave="afterLeave">
+            <div class="FullPlayer_box animated" v-show="isShowFullPlayer" ref="cdWrapper">
                 <img src="../../../static/img/down.png" class="updown" @click="FullPlayer_updown"/>
                 <div class="FullPlayer" :style="{background:'url('+MusicObj.songImg+') center'}">
                     <div class="bg-cover"></div>
@@ -19,7 +20,7 @@
                 <div class="play-board">
                     <img id="needle" class="play-needle" :class="{resumeNeedle:isPlay,pauseNeedle:isPlaue}" src="./../../../static/img/play_needle.png"/>
                     <div class="disk-bg"></div>
-                    <div class="disk-cover disk-cover-animation" :class="{diskPaly:isPlay,diskPaused:isPlaue}" >
+                    <div class="disk-cover disk-cover-animation" :class="{diskPaly:isPlay,diskPaused:isPlaue}">
                         <img class="album" :src="MusicObj.songImg"/>
                         <img class="disk-border" src="./../../../static/img/play_disc.png"/>
                     </div>
@@ -51,7 +52,7 @@
                     </div>
                 </div>
             </div> 
-        </transition-group>
+        </transition>
         <!--底部歌曲弹出列表-->
         <transition-group enter-active-class="bounceInUp" leave-active-class="fadeOutDown">
             <div class="sheetBox" v-show="showSheet" :key="0" @click="hideSheet">
@@ -449,6 +450,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import BScroll from 'better-scroll'
+import animations from 'create-keyframe-animation'
 export default {
     data(){
         return{
@@ -500,6 +502,59 @@ export default {
         }
     },
     methods:{
+        enter(el, done){
+            const {x, y, scale} = this._getPosAndScale();
+            let animation = {
+                0: {
+                    transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
+                },
+                60: {
+                    transform: `translate3d(0,0,0) scale(1.1)`
+                },
+                100: {
+                    transform: `translate3d(0,0,0) scale(1)`
+                }
+            }
+            animations.registerAnimation({
+                name: 'move',
+                animation,
+                presets: {
+                    duration: 400,
+                    easing: 'linear'
+                }
+            })
+
+            animations.runAnimation(this.$refs.cdWrapper, 'move', done)
+        },
+        afterEnter(){
+            animations.unregisterAnimation('move')
+            this.$refs.cdWrapper.style.animation = ''
+        },
+        leave(el, done){
+            this.$refs.cdWrapper.style.transition = 'all 0.4s'
+            const {x, y, scale} = this._getPosAndScale()
+            this.$refs.cdWrapper.style.transform = `translate3d(${x}px,${y}px,0) scale(${scale})`
+            this.$refs.cdWrapper.addEventListener('transitionend', done)
+        },
+        afterLeave(){
+            this.$refs.cdWrapper.style.transition = ''
+            this.$refs.cdWrapper.style.transform= ''
+        },
+        _getPosAndScale() {
+            const targetWidth = 40
+            const paddingLeft = 40
+            const paddingBottom = 30
+            const paddingTop = 80
+            const width = window.innerWidth * 0.8
+            const scale = targetWidth / width
+            const x = -(window.innerWidth / 2 - paddingLeft)
+            const y = window.innerHeight - paddingTop - width / 2 - paddingBottom
+            return {
+                x,
+                y,
+                scale
+            }
+        },
         touchendStart(){
             this.isMove=false;
         },

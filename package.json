@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "better-scroll": "^1.12.6",
+    "create-keyframe-animation": "^0.1.0",
     "muse-ui": "^3.0.1",
     "postcss-loader": "^2.1.6",
     "postcss-px2rem": "^0.3.0",
