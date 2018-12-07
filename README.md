@@ -4,7 +4,7 @@
 
 ### 1.扫码快速体验（使用手机浏览器打开）
 ***
-![扫码快速体验](http://www.zhengsi.info/1543569162.png)
+![扫码快速体验](https://github.com/zhengsi1234/Vue/blob/master/static/Demonstration/1543569162.png)
 
 
 ### 2.安装与运行
