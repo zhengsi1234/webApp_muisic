@@ -1,10 +1,17 @@
 <template>
     <div id="rankings_box" :style="{bottom:bottomNum}" >
+				<div class="rankings_title">
+						<img src="../../../static/img/back.png" class="updown" @click="updown"/>
+						<h2 v-html="topinfo.ListName"></h2>
+				</div>
         <scroll :data="listData" id="rankings">
             <div class="rankings_content">
                 <!---->
                 <div class="songlist">
-                    <ul>
+									<div class="rankings_bg">
+										<img :src="topinfo.pic_album"/>
+									</div>
+                    <ul :style="{bottom:bottomNum}">
                         <li v-for="(item,index) in listData" :key="index" @click="playMusic(item)">
                             <div class="songlist_new">
                                 <img v-lazy='"http://imgcache.qq.com/music/photo/album_300/"+(item.data.albumid%100)+"/300_albumpic_"+item.data.albumid+"_0.jpg"'/>
@@ -26,9 +33,38 @@
         position: fixed;
         top: 0;
         width: 100%;
-        height: 100%;
         background: #333333;
     }
+		.rankings_title{
+			width: 100%;
+			height: 1.3rem;
+			background: rgba(0,0,0,0.5);
+			position: relative;
+		}
+		.rankings_title img{
+				position: absolute;
+				width: 0.9rem;
+				height: 0.9rem;
+				left: 0.3rem;
+				top: 50%;
+				transform: translateY(-50%);
+		}
+		.rankings_title h2{
+			text-align: center;
+			font-size: 16px;
+			color: #DDDDDD;
+			line-height: 1.3rem;
+		}
+		.rankings_bg{
+			width: 100%;
+			height: 6rem;
+			overflow: hidden;
+		}
+		.rankings_bg img{
+			display: block;
+			width: 100%;
+		}
+		
      #rankings{
         height: 100%;
         overflow: hidden;
@@ -88,7 +124,9 @@ export default {
             listData:[],
             isShow:false,
             isUpnLoadd:false,
-            shpwDroptxt:"释放加载更多"
+            shpwDroptxt:"释放加载更多",
+						topinfo:{},
+						
         }
     },
     components: {
@@ -106,6 +144,9 @@ export default {
         this.getRankTopList(id);
     },
     methods:{
+				updown(){
+					this.$router.back(-1);
+				},
         getRankTopList(id){
             let url="https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg";
             let postData ={
@@ -130,6 +171,7 @@ export default {
                 
                 let rankTop=JSON.parse(res.bodyText);
                 this.listData=rankTop.songlist;
+								this.topinfo=rankTop.topinfo;
                 console.log(rankTop);
             },function(){
                 //console.log(1)
@@ -207,4 +249,3 @@ export default {
     }
 }
 </script>
-
