@@ -7,8 +7,8 @@
             <div class="FullPlayer_box animated" v-show="isShowFullPlayer" ref="cdWrapper">
                 <img src="../../../static/img/down.png" class="updown" @click="FullPlayer_updown"/>
                 <div class="FullPlayer">
-                    <!-- <div ></div> -->
                     <img :src="MusicObj.songImg" class="bg-cover"/>
+					<div class="FullPlayer_bg"></div>
                 </div>
                 <!--标题-->
                 <div class="FullPlayer_title">
@@ -21,7 +21,7 @@
                 <div class="play-board">
                     <img id="needle" class="play-needle" :class="{resumeNeedle:isPlay,pauseNeedle:isPlaue}" src="./../../../static/img/play_needle.png"/>
                     <div class="disk-bg"></div>
-                    <div class="disk-cover disk-cover-animation" :class="{diskPaly:isPlay,diskPaused:isPlaue}">
+                    <div class="disk-cover" :class="{diskPaly:isPlay,diskPaused:isPlaue}">
                         <img class="album" :src="MusicObj.songImg"/>
                         <img class="disk-border" src="./../../../static/img/play_disc.png"/>
                     </div>
@@ -71,7 +71,7 @@
         </transition-group>
         <!--底部播放器-->
         <div class="bottom_musicBox" v-show="isShowbottomPlayer">
-            <img :src="MusicObj.songImg" class="bottom_pic" @click="BottomPlay"/>
+            <img :src="MusicObj.songImg" class="bottom_pic" :class="{diskPaly:isPlay,diskPaused:isPlaue}" @click="BottomPlay"/>
             <div class="bottom_musicNew" @click="BottomPlay">
                 <h2 v-html="MusicObj.songName"></h2>
                 <p v-html="MusicObj.singer"></p>
@@ -179,22 +179,29 @@
         -moz-filter: blur(15px) brightness(0.6);  
         filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */ 
         z-index: -1;  
-        filter: blur(20px);
+        filter: blur(10px);
     }
     .bg-cover{
-        /* background: rgba(0, 0, 0, 0.7); */
         height: 100%;
         width: 100%;
     }
+	.FullPlayer_bg{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.5);
+	}
     .FullPlayer_title{
         color: #fff;
         position: absolute;
         top: 0px;
         left: 0px;
-        height: 9%;
+        height: 10%;
         width: 100%;
         z-index: 11;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.3);
     }
     .music-info{
         width: 100%;
@@ -254,13 +261,6 @@
         left: 50%;
         top: 2.101rem;
         margin-left: -3.5rem;
-    }
-
-    .disk-cover-animation {
-        animation: rotate-disk 20s infinite normal linear;
-        animation-play-state: paused;
-        -webkit-animation: rotate-disk 20s infinite normal linear;
-        -webkit-animation-play-state: paused;
     }
     .disk-cover img {
         display: block;
@@ -400,7 +400,7 @@
         border: 1px solid #eeeeee;
         padding: 0.2rem 0;
         box-sizing: border-box;
-        background: #dddddd;
+        background: #ffffff;
     }
     .bottom_musicNew{
         width: 100%;
@@ -414,12 +414,13 @@
         left: 0.2rem;
         top: 50%;
         z-index: 1;
-        width: 1.5rem;
-        height: 1.3rem;
-        transform: translateY(-50%);
+        width: 1.4rem;
+        height: 1.4rem;
+        margin-top: -0.7rem;
+        border-radius: 50%;
     }
     .bottom_musicNew h2{
-        font-size: 16px;
+        font-size: 14px;
         width: 100%;
         height: 0.8rem;
         line-height: 0.8rem;
@@ -428,7 +429,7 @@
         text-overflow: ellipsis;
     }
     .bottom_musicNew p{
-        font-size: 14px;
+        font-size: 12px;
         height: 0.4rem;
         line-height: 0.4rem;
         width: 100%;

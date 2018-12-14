@@ -4,7 +4,8 @@ import Home from './../components/Home/index';
 import My from './../components/My/index';
 import Search from './../components/Search/index';
 import Singer from './../components/Singer/index';
-import Rankings from './../components/Rankings/index';
+import Rankings from './../components/Rankings/Rankings';
+import RankingsDetails from './../components/Rankings/index';
 import singerDetails from './../components/Singer/singerDetails';
 import SearchList from './../components/Search/SearchList';
 import textjsonp from './../components/textjsonp'
@@ -33,7 +34,10 @@ export default new Router({
     {
       path: '/rankings',
       name: 'Rankings',
-      component: Rankings
+      component: Rankings,
+      children:[
+        { path: '/Rankings/RankingsDetails/:id', name:"RankingsDetails",component: RankingsDetails},
+      ]
     },
     {
       path: '/search',

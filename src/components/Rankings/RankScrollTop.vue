@@ -20,11 +20,6 @@ export default {
             default:null
         }
     },
-    data(){
-        return{
-            page:15
-        }
-    },
     mounted(){
         setTimeout(()=>{
             this._initScroll();
