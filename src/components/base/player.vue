@@ -179,7 +179,7 @@
         -moz-filter: blur(15px) brightness(0.6);  
         filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */ 
         z-index: -1;  
-        filter: blur(10px);
+        filter: blur(13px);
     }
     .bg-cover{
         height: 100%;
@@ -191,7 +191,7 @@
 		top: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0,0,0,0.5);
+		background: rgba(0,0,0,0.7);
 	}
     .FullPlayer_title{
         color: #fff;
@@ -801,5 +801,3 @@ export default {
     }
 }
 </script>
-
-
