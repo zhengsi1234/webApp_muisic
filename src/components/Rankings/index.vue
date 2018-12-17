@@ -1,16 +1,16 @@
 <template>
     <div id="rankings_box" :style="{bottom:bottomNum}" >
-				<div class="rankings_title">
-						<img src="../../../static/img/back.png" class="updown" @click="updown"/>
-						<h2 v-html="topinfo.ListName"></h2>
-				</div>
+        <div class="rankings_title">
+                <img src="../../../static/img/back.png" class="updown" @click="updown"/>
+                <h2 v-html="topinfo.ListName"></h2>
+        </div>
         <scroll :data="listData" id="rankings">
             <div class="rankings_content">
                 <!---->
                 <div class="songlist">
-									<div class="rankings_bg">
-										<img :src="topinfo.pic_album"/>
-									</div>
+                    <div class="rankings_bg">
+                        <img :src="topinfo.pic_album"/>
+                    </div>
                     <ul :style="{bottom:bottomNum}">
                         <li v-for="(item,index) in listData" :key="index" @click="playMusic(item)">
                             <div class="songlist_new">
@@ -144,9 +144,9 @@ export default {
         this.getRankTopList(id);
     },
     methods:{
-				updown(){
-					this.$router.back(-1);
-				},
+        updown(){
+            this.$router.back(-1);
+        },
         getRankTopList(id){
             let url="https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg";
             let postData ={
@@ -177,20 +177,18 @@ export default {
                 //console.log(1)
             });
         },
-
-
-        getSonglist(){
-           let url="https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?tpl=3&page=detail&date=2018_33&topid=26&type=top&song_begin=0&song_num=15&g_tk=1567556135&loginUin=845548367&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0";
-           this.$http.jsonp(url,{
-                //请求参数
-                jsonp:'jsonpCallback'
-            }).then(function(res){ 
-                let songList=JSON.parse(res.bodyText);
-                this.listData=songList.songlist;
-            },function(){
-                //console.log(1)
-            });
-        },
+        // getSonglist(){
+        //    let url="https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?tpl=3&page=detail&date=2018_33&topid=26&type=top&song_begin=0&song_num=15&g_tk=1567556135&loginUin=845548367&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0";
+        //    this.$http.jsonp(url,{
+        //         //请求参数
+        //         jsonp:'jsonpCallback'
+        //     }).then(function(res){ 
+        //         let songList=JSON.parse(res.bodyText);
+        //         this.listData=songList.songlist;
+        //     },function(){
+        //         //console.log(1)
+        //     });
+        // },
         playMusic(item){
             this.getvkey(item.data.songmid,item.data.songname,item.data.singer[0].name,item.data.albumid);
         },
